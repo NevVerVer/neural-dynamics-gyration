@@ -28,13 +28,28 @@ def subtract_cc_mean(datas):
     
 def shuffle_data(datas, times, shuffle_type, go_cue_time, keep_var=False):
     """
-    Shufflings of data from paper "" Churchland et al.
-    1 type: TODO
-    2 type: 
+    Shufflings of data from paper:
+    "Neural Population Dynamics During Reaching", Churchland et al., 2012
+
+    All 3 base shuffle controls are based on the distinction between preparatory
+    activity (which is left intact) and peri-movement activity.
+    1 type: 
+        The pattern of peri-movement activity was inverted for half of the
+        conditions, selected at random. The inversion was performed around
+        the dividing time-point, such that continuity with preparatory
+        activity was preserved. This procedure was performed separately 
+        for each neuron.
+    2 type:
+        Similar to the 1st, but inverted the peri-movement activity
+        pattern for all conditions. 
     3 type: 
+        Randomly reassigned the peri-movement activity from one condition
+        to the preparatory activity from another. The beginning of the
+        peri-movement pattern was simply appended to the final firing rate
+        during the preparatory state, such that there was no discontinuity.
+        The same reassignment was performed for all neurons.
     """
 
-    # inv_start = times.index(go_cue_time) 
     inv_start = go_cue_time
     shuffled_data = np.stack(datas)
     n_cond, n_time, n_neuron = shuffled_data.shape

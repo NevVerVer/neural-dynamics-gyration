@@ -29,8 +29,8 @@ pip install -r requirements.txt
 
 ## Datasets Downloading
 
-1. Run script that downloads and unzip data: `bash prepare_data.sh`. Or download archive with datasets manually from [here](https://drive.google.com/drive/folders/1AWO8XZpLBW1fkp5ylF6-w6J8gYcnnOkp?usp=sharing). You can also download datasets from the original source from here ...
-# TODO link to table.
+1. Run script that downloads and unzip data: `bash prepare_data.sh`. Or download archive with datasets manually from [here](https://drive.google.com/drive/folders/1AWO8XZpLBW1fkp5ylF6-w6J8gYcnnOkp?usp=sharing). You can also download datasets from the original source from here ... # TODO link to table.
+
  
 2. Add path to downloaded datasets to `config.py` file 
 
@@ -51,6 +51,7 @@ This is `inline code`.
 def hello_world():
 print("Hello, World!")
 ```
+Implemented shuffling CMPT, CR from TODO: links and dois and a bit of description 
 
 ## Contributing
 We welcome contributions to this repository. If you're interested in enhancing the code or adding new features, please submit a pull request. For major changes, please open an issue first to discuss your ideas.
@@ -66,11 +67,11 @@ Author A., Author B., Author C., (Year). Unveiling rotational structure in neura
 **TODO add citation**
 **TODO add bibtex**
 
-Special thanks to XYZ for their valuable feedback and suggestions.
-Thanks to ![jPCA implementation](https://github.com/bantin/jPCA)
+Special thanks to @nosmokingsurfer for their valuable feedback and suggestions.
+Thanks to @bantin for the [jPCA implementation](https://github.com/bantin/jPCA)
 
 ## Contact
-For any questions or clarifications, please reach out to:
+For any questions or clarifications, please reach out to: ekaterina.kuzmina@skoltech.ru
 
 ## Datasets Used in Study
 | Name & Authors                                                                                                                    | Year | Brain Areas                                                                                    | Behavior                                                                                              | Source                                                                                                                                                                                     | Original Paper                              |
@@ -80,16 +81,3 @@ For any questions or clarifications, please reach out to:
 | "Neural Population Dynamics in Motor Cortex are Different for Reach and Grasp", Suresh et al.                                     | 2020 | primary motor cortex (M1), somatosensory cortex (SCx)                                          | isolated grasping task, center-out reaching task                                                      | [dryad](https://doi.org/10.5061/dryad.xsj3tx9cm)                                                                                                                                           | [link](https://doi.org/10.7554/eLife.58848) |
 | "Rotational dynamics in motor cortex are consistent with a feedback controller", Kalidindi et al.                                 | 2021 | premotor and primary motor cortex (MC), primary somatosensory cortex (areas 1, 2, 3a, 5)       | delayed center-out reaching task, posture perturbation task                                           | [dryad](https://doi.org/10.5061/dryad.nk98sf7q7) [github](https://archive.softwareheritage.org/browse/revision/d61decd3cd750147ef098de1041326fd2be07ab2/?path=monkey_analysis/data_neural) | [link](https://doi.org/10.7554/eLife.67256) |
 | "Context-dependent Computation by Recurrent Dynamics in Prefrontal Cortex", Mante et al.                                          | 2013 | prefrontal cortex (PFC): arcuate sulcus in and around the frontal eye field (FEF)              | context-dependent 2-alternative forced-choice visual discrimination task (perceptual decision-making) | [iniuzhch](https://www.ini.uzh.ch/en/research/groups/mante/data.html)                                                                                                                      | [link](https://doi.org/10.1038/nature12742) |
----------------------
----------------------
----------------------
-
-### НОУТБУКИ
-1. Shuffling_Procedure - mostly contains shuffling procedures from original article. Also the version of 3rd shuffling which do not change variance of data. Also some exploratory analysis of how jPCA behaves if we change data a little bit. Make Rotation without jPCA. Checked how constant change PCA. 
-2. pca_rotation - playground to create rotation plane with PCA, without jPCA
-3. dev - pca_rotation and shuffle_data functions creation
-4. CN1_fPCA - fPCA only
-5. CN1 - tries to render nice runnig wave plot; тыкание в jPCA; генерация данных динамической модель
-
-I propose to do beautiful README here, then just move it to repo to be published
-
