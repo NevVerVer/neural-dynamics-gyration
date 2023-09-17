@@ -107,8 +107,8 @@ class NeuralDataset:
         self.data = self.info_d['data']
         self.time, self.go_cue = self.info_d['time'], self.info_d['go_cue']
         self.load_additional_info()
-        self.full_data = self.data
-        self.full_time, self.full_go_cue = self.time, self.go_cue
+        self.full_data = self.data.copy()
+        self.full_time, self.full_go_cue = self.time.copy(), self.go_cue.copy()
         self.preproc_h5 = True
 
     def crop_data(self, tstart, tend):
@@ -120,9 +120,9 @@ class NeuralDataset:
         self.go_cue = self.go_cue - tstart
 
     def reset_data(self):
-        self.data = self.full_data
-        self.go_cue = self.full_go_cue
-        self.time = self.full_time
+        self.data = self.full_data.copy()
+        self.go_cue = self.full_go_cue.copy()
+        self.time = self.full_time.copy()
 
     def shuffle_data(self, shuffling_type, keep_var=False):
         if shuffling_type in [1, 2, 3]:
@@ -331,8 +331,8 @@ class GraspingSuresh(NeuralDataset):
         self.data, self.go_cue = align_mean_conds(a, c)
         self.time = np.arange(0, self.data.shape[1])
 
-        self.full_data = self.data
-        self.full_go_cue, self.full_time = self.go_cue, self.time
+        self.full_data = self.data.copy()
+        self.full_go_cue, self.full_time = self.go_cue.copy(), self.time.copy()
         print(f'Data pre-processed! Shape: {self.data.shape}, Go cue={self.go_cue}')
 
     def extract_cues(self, dataset_idx):
@@ -409,8 +409,8 @@ class ReachingGallego(NeuralDataset):
         self.data, self.go_cue = align_mean_conds_LFP(a, g)
         self.time = np.arange(0, self.data.shape[1])
 
-        self.full_data = self.data
-        self.full_go_cue, self.full_time = self.go_cue, self.time
+        self.full_data = self.data.copy()
+        self.full_go_cue, self.full_time = self.go_cue.copy(), self.time.copy()
         print(f'Data pre-processed! Shape: {self.data.shape}, Go cue={self.go_cue}')
 
     def create_info_dict(self):
@@ -442,8 +442,8 @@ class ReachingChurchland(NeuralDataset):
         go_cue_time = 50 
         self.go_cue = list(self.time).index(go_cue_time)
 
-        self.full_data = self.data
-        self.full_go_cue, self.full_time = self.go_cue, self.time
+        self.full_data = self.data.copy()
+        self.full_go_cue, self.full_time = self.go_cue.copy(), self.time.copy()
         print('No preprocessing needed! Loaded.')
 
     def create_info_dict(self):
@@ -472,8 +472,8 @@ class ReachingKalidindi(NeuralDataset):
         self.time = np.arange(0, self.data.shape[1]) 
         self.go_cue = 0
 
-        self.full_data = self.data
-        self.full_go_cue, self.full_time = self.go_cue, self.time
+        self.full_data = self.data.copy()
+        self.full_go_cue, self.full_time = self.go_cue.copy(), self.time.copy()
         print('No preprocessing needed! Loaded.')
 
     def create_info_dict(self):
@@ -536,8 +536,8 @@ class BehaviouralMante(NeuralDataset):
             self.go_cue = 0
             self.time = np.arange(0, nt)
 
-            self.full_data = self.data
-            self.full_go_cue, self.full_time = self.go_cue, self.time
+            self.full_data = self.data.copy()
+            self.full_go_cue, self.full_time = self.go_cue.copy(), self.time.copy()
 
     def extract_idxes(self, cond_sorting):
         idx_list = []
