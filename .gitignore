@@ -9,6 +9,7 @@ __pycache__/
 #redundant folders
 draft/
 prev/
+figs/
 
 # Distribution / packaging
 .Python

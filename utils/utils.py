@@ -190,8 +190,12 @@ def generate_response(t_max=600, N=100, a=0., b=1., steps=61,
     N:     number of neurons
     a:     wave start point
     b:     wave speed
+    steps: number of time points for a generated wave
     phase_noise: std of noise level of a wave phase
+    phases: manually given phases (initial positions) of waves
+    sigma_noise: std of wave widths
     amp_noise: std of noise level for a wave amplitude 
+    amp_mean: mean of wave amplitudes
 
     Returns: 
     np.ndarray of size [num_of_neurons, time_steps]
@@ -223,19 +227,14 @@ def compute_curvature(X):
 
 def compute_lambdas(datas):
     """
-    Return: lambda_n, lambda_t, lambda_c
+    Input: datas :: C x T x N ndarray
+    Return: eigenvalues of diff cov matrix
     """
-    #nc, nt, nn = datas.shape
-    neuro_stack = np.concatenate(datas)
-    time_stack = np.concatenate(datas.transpose(0, 2, 1))
-    cond_stack = np.transpose(datas, (0, 2, 1)).reshape(datas.shape[0], -1)
-    NC = np.cov(neuro_stack.T)
-    TC = np.cov(time_stack.T)
-    CC = np.cov(cond_stack)
-    Neig = np.abs(np.sort(np.linalg.eigh(NC)[0])[::-1])
-    Teig = np.abs(np.sort(np.linalg.eigh(TC)[0])[::-1])
-    Ceig = np.abs(np.sort(np.linalg.eigh(CC)[0])[::-1])
-    return Neig[0] / Neig.sum(), Teig[0] / Teig.sum(), Ceig[0] / Ceig.sum()
+    #compute differential covariance
+    X = np.concatenate([x[:-1] for x in datas])
+    X_dot = np.concatenate([np.diff(x, axis=0) for x in datas])
+    Xeig = np.linalg.eigvals(X_dot.T @ X,)
+    return Xeig
 
 
 def func(t, mu, sigma, amp):
