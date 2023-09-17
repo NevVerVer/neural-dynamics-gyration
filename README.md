@@ -2,12 +2,13 @@
 
 A repository containing the code accompanying the research paper "Unveiling Rotational Structure in Neural Data" by Kuzmina E., Kriukov D., Lebedev M.
 
-Published in ..., **TODO doi, etc**
+Published in ..., **TODO doi, etc** | !(bioRxiv)[https://www.biorxiv.org/content/10.1101/2023.09.11.557230v1]
 
 ## Description
 
 **TODO write something short but explaining what, why and how of paper**
-This repository hosts the code and relevant scripts used in the paper which explores rotational structures in neural datasets. By leveraging XYZ algorithm, we unveil patterns in the data that provide insights into ABC (some short specifics about the paper's content).
+This repository hosts the code used in the work which explores and unveil the nature of rotational dynamics encountered in a lot of neural datasets. Underpinned with math insides from out work we develop a framework to evaluate and quantify the rotationess in data with help of **Gyration Numbers** - ... .
+The resulting **Gyration Plane** allows to compare and analyse multiple datasets together.
 
 ## Table of Contents??
 
@@ -27,6 +28,21 @@ This repository hosts the code and relevant scripts used in the paper which expl
 
 3. Install the required packages:
 pip install -r requirements.txt
+
+## Datasets Downloading
+
+1. Run script that downloads and unzip data: `bash prepare_data.sh`. Or download archive with datasets manually from ![here](https://drive.google.com/drive/folders/1AWO8XZpLBW1fkp5ylF6-w6J8gYcnnOkp?usp=sharing).
+ 
+2. Add path to downloaded datasets to `config.py` file 
+
+### Datasets Used in Study
+| Name & Authors                                                                                                                    | Year | Brain Areas                                                                                    | Behavior                                                                                              | Source                                                                                                                                                                               | Original Paper                       |
+|-----------------------------------------------------------------------------------------------------------------------------------|------|------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------|
+| "Neural Population Dynamics During Reaching", Churchland et al.                                                                   | 2012 | primary motor cortex (M1), dorsal premotor cortex (PMd)                                        | straight hand reaches, curved hand reaches                                                            | ...                                                                                                                                                                                  | ![link](doi.org/10.1038/nature11129) |
+| "Local field potentials reflect cortical population dynamics in a region-specific and frequency-dependent manner", Gallego et al. | 2022 | primary motor cortex (M1), dorsal premotor cortex (PMd), primary somatosensory cortex (area 2) | delay centre-out reaching task using a manipulandum                                                   | ![dryad](doi.org/10.5061/dryad.xd2547dkt)                                                                                                                                            | ![link](doi.org/10.7554/eLife.73155) |
+| "Neural Population Dynamics in Motor Cortex are Different for Reach and Grasp", Suresh et al.                                     | 2020 | primary motor cortex (M1), somatosensory cortex (SCx)                                          | isolated grasping task, center-out reaching task                                                      | ![](doi.org/10.5061/dryad.xsj3tx9cm)                                                                                                                                                 | ![link](doi.org/10.7554/eLife.58848) |
+| "Rotational dynamics in motor cortex are consistent with a feedback controller", Kalidindi et al.                                 | 2021 | premotor and primary motor cortex (MC), primary somatosensory cortex (areas 1, 2, 3a, 5)       | delayed center-out reaching task, posture perturbation task                                           | ![dryad](doi.org/10.5061/dryad.nk98sf7q7) ![github](https://archive.softwareheritage.org/browse/revision/d61decd3cd750147ef098de1041326fd2be07ab2/?path=monkey_analysis/data_neural) | ![link](doi.org/10.7554/eLife.67256) |
+| "Context-dependent Computation by Recurrent Dynamics in Prefrontal Cortex", Mante et al.                                          | 2013 | prefrontal cortex (PFC): arcuate sulcus in and around the frontal eye field (FEF)              | context-dependent 2-alternative forced-choice visual discrimination task (perceptual decision-making) | ![ini.uzh](https://www.ini.uzh.ch/en/research/groups/mante/data.html)                                                                                                                | ![link](doi.org/10.1038/nature12742) |
 
 ## Usage
 ### Data Preparation
@@ -61,6 +77,7 @@ Author A., Author B., Author C., (Year). Unveiling rotational structure in neura
 **TODO add bibtex**
 
 Special thanks to XYZ for their valuable feedback and suggestions.
+Thanks to ![jPCA implementation](https://github.com/bantin/jPCA)
 
 ## Contact
 For any questions or clarifications, please reach out to:
