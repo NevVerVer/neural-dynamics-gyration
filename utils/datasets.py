@@ -13,7 +13,6 @@ from jPCA.util import plot_projections
 import matplotlib.patches as patches
 from matplotlib import pyplot as plt
 import glob
-from natsort import natsorted
 import os
 import scipy.io
 from scipy.ndimage import gaussian_filter1d
@@ -492,7 +491,7 @@ class BehaviouralMante(NeuralDataset):
                     4: 'movement_only']
     """
     def load_data(self):
-        self.paths = natsorted(os.listdir(self.dataset_dir))
+        self.paths = sorted(os.listdir(self.dataset_dir))
         print('This dataset is loaded into preprocessing method!')
 
     def load_additional_info(self):
