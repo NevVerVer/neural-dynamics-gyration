@@ -1,6 +1,6 @@
 # Unveiling Rotational Structure in Neural Data
 
-A repository containing the code accompanying the research paper titled "Unveiling Rotational Structure in Neural Data" by Kuzmina E., Kriukov D., Lebedev M. 
+A repository containing the code accompanying the research paper "Unveiling Rotational Structure in Neural Data" by Kuzmina E., Kriukov D., Lebedev M.
 
 Published in ..., **TODO doi, etc**
 
@@ -10,25 +10,28 @@ Published in ..., **TODO doi, etc**
 This repository hosts the code and relevant scripts used in the paper which explores rotational structures in neural datasets. By leveraging XYZ algorithm, we unveil patterns in the data that provide insights into ABC (some short specifics about the paper's content).
 
 ## Table of Contents??
+
 ## Badges ??
 
 ## Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/repositoryname.git
+   git clone https://github.com/NevVerVer/neural-dynamics-gyration.git
+   ```
 
 2. Navigate to the repository directory:
-cd repositoryname
+   ```bash
+   cd neural-dynamics-gyration
+   ```
 
 3. Install the required packages:
 pip install -r requirements.txt
 
 ## Usage
 ### Data Preparation
-Place your data in ./data/ directory.
-Run the data preprocessing script:
-python preprocess_data.py
+Place your data in `./datasets/` directory or execture script `smth.py` to download data used in study.
+If you use datasets used in study, you can see how to pre-process and save datasets to `h5` file in notebook `datasets_analysis.ipynb`. If using other dataset, you can use parent class  `NeuralDataset` (from `utils/datasets.py`) and add specific methods to load data and pre-process.
 
 ### Main Experiments
 python main_experiment.py

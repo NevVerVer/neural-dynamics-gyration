@@ -1,7 +1,9 @@
 """
 Created on Sat September 16 21:15:06 2023
-Description: Controller class implementations for:
-TODO: paper url here
+
+Description: Datasets class implementation for:
+https://www.biorxiv.org/content/10.1101/2023.09.11.557230v1
+
 @author: Ekaterina Kuzmina, ekaterina.kuzmina@skoltech.ru
 @author: Dmitrii Kriukov, dmitrii.kriukov@skoltech.ru
 """
@@ -88,7 +90,7 @@ class NeuralDataset:
     """
     Parent class. Has basic loading, saving and plotting methods.
     load_data() and preprocess_data() should be defined for 
-    each dataset separately.
+    each dataset individually.
     Input:
     dataset_dir: folder containing raw files to load
     """
@@ -267,14 +269,18 @@ class NeuralDataset:
 
 class GraspingSuresh(NeuralDataset):
     """
-    TODO: description movements, ['M1', 'S1']
-    (from notion)
+    Dataset from paper:
+    "Neural Population Dynamics in Motor Cortex are Different for Reach and Grasp",
+    Suresh et al. 2020 [doi.org/10.7554/eLife.58848]
 
-    name of article
+    Comparing neural dynamics during reaching and grasping.  
+    Behaviour: isolated grasping task, center-out reaching task
+    Brain areas: primary motor cortex (M1), somatosensory cortex (SCx)
 
-    doi, link 
-    how to download (in our repo will be script)
-
+    Link to dataset: 
+        doi.org/10.5061/dryad.xsj3tx9cm
+    Or see the tutorial how to download at:
+        github.com/NevVerVer/neural-dynamics-gyration/blob/main/datasets_analysis.ipynb
     """
     def load_data(self, dataset_name):
         self.data_dict = mat73.loadmat(self.dataset_dir + dataset_name)
@@ -377,14 +383,20 @@ class GraspingSuresh(NeuralDataset):
 
 class ReachingGallego(NeuralDataset):
     """
-    TODO: description movements,['M1', 'PMd', 'LeftS1Area2']
-    (from notion)
+    Dataset from paper:
+    "Local field potentials reflect cortical population dynamics in a
+     region-specific and frequency-dependent manner", 
+    Gallego et al. 2022 [doi.org/10.7554/eLife.73155]
 
-    name of article
+    Latent dynamics of Local Field Potential. 
+    Behaviour: delay centre-out reaching task using a manipulandum
+    Brain areas: primary motor cortex (M1), dorsal premotor cortex (PMd),
+                 primary somatosensory cortex (area 2)
 
-    doi, link 
-    how to download (in our repo will be script)
-
+    Link to dataset: 
+        doi.org/10.5061/dryad.xd2547dkt
+    Or see the tutorial how to download at:
+        github.com/NevVerVer/neural-dynamics-gyration/blob/main/datasets_analysis.ipynb
     """
     def load_data(self, dataset_name):
         self.data_dict = mat73.loadmat(self.dataset_dir + dataset_name)
@@ -425,8 +437,18 @@ class ReachingGallego(NeuralDataset):
 
 class ReachingChurchland(NeuralDataset):
     """
-    TODO: description
+    Dataset from paper:
+    "Neural Population Dynamics During Reaching", Churchland et al. 2012
+    [doi.org/10.1038/nature11129]
 
+    Original jPCA paper. No raw data. Data is already preprocessed and sorted. 
+    Behaviour: straight hand reaches, curved hand reaches
+    Brain areas: primary motor cortex (M1), dorsal premotor cortex (PMd)
+
+    Link to dataset: 
+        ...
+    Or see the tutorial how to download at:
+        github.com/NevVerVer/neural-dynamics-gyration/blob/main/datasets_analysis.ipynb
     """
     def load_data(self, dataset_name):
         from jPCA.util import load_churchland_data
@@ -455,8 +477,20 @@ class ReachingChurchland(NeuralDataset):
 
 class ReachingKalidindi(NeuralDataset):
     """
-    TODO: description
+    Dataset from paper:
+    "Rotational dynamics in motor cortex are consistent with a feedback controller", 
+    Kalidindi et al. 2021 [doi.org/10.7554/eLife.67256]
 
+    Test what NN architecture can produce brain-like signals.  
+    Behaviour: delayed center-out reaching task, posture perturbation task
+    Brain areas: premotor and primary motor cortex (MC),
+                 primary somatosensory cortex (areas 1, 2, 3a, 5)
+
+    Link to datasets: 
+        1. https://archive.softwareheritage.org/browse/revision/d61decd3cd750147ef098de1041326fd2be07ab2/?path=monkey_analysis/data_neural
+        2. doi.org/10.5061/dryad.nk98sf7q7
+    Or see the tutorial how to download at:
+        github.com/NevVerVer/neural-dynamics-gyration/blob/main/datasets_analysis.ipynb
     """
     def load_data(self, dataset_name):
         import scipy.io
@@ -485,11 +519,19 @@ class ReachingKalidindi(NeuralDataset):
 
 class BehaviouralMante(NeuralDataset):
     """
-    TODO: description
-    cond_sorting = [1: 'color_movement', 
-                    2: 'color_only', 
-                    3: 'color_mov_context',
-                    4: 'movement_only']
+    Dataset from paper: 
+    "Context-dependent Computation by Recurrent Dynamics in Prefrontal Cortex", 
+    Mante et al. 2013 [doi.org/10.1038/nature12742]
+
+    Unfolding dynamical process in PFC during complex behaviour.
+    Behaviour: context-dependent 2-alternative forced-choice
+               visual discrimination task (perceptual decision-making)
+    Brain areas: prefrontal cortex (PFC)
+
+    Link to dataset:
+        https://www.ini.uzh.ch/en/research/groups/mante/data.html
+    Or see the tutorial how to download at:
+        github.com/NevVerVer/neural-dynamics-gyration/blob/main/datasets_analysis.ipynb
     """
     def load_data(self):
         self.paths = natsorted(os.listdir(self.dataset_dir))
