@@ -7,3 +7,4 @@ seaborn
 ipykernel
 mat73
 tqdm
+gdown
