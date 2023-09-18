@@ -630,32 +630,30 @@ class SyntheticTravelingWave(NeuralDataset):
     def load_additional_info(self):
         self.sigma = self.info_d['sigma']
         self.wave_speed = self.info_d['wave_speed']
-        self.ncond = self.info_d['ncond']
         self.sigma_noise = self.info_d['sigma_noise']
         self.phase_noise = self.info_d['phase_noise']
         self.amp_noise = self.info_d['amp_noise']
 
-    def preprocess_data(self, sigma, wave_speed, ncond, 
-                        sigma_noise=0.0, phase_noise=0.0, 
-                        amp_noise=0.0):
+    def preprocess_data(self, sigma, wave_speed, ncond, nneur, t_max, steps,
+                        sigma_noise=0.0, phase_noise=0.0, amp_noise=0.0):
         print('Generating datasets!')
         self.sigma = sigma
+        self.steps = steps
         self.wave_speed = wave_speed
-        self.ncond = ncond
         self.sigma_noise = sigma_noise
         self.phase_noise = phase_noise
         self.amp_noise = amp_noise
-        self.data = [generate_response(t_max=600, N=200, 
-                                sigma=sigma, 
-                                a=2, b=wave_speed, steps=200, 
-                                amp_mean=ampi,
-                                sigma_noise=sigma_noise,
-                                phase_noise=phase_noise,
-                                amp_noise=amp_noise)[0].T 
-                                for ampi in np.linspace(0.5, 1.0, ncond)]
+        self.data = [generate_response(t_max=t_max, N=nneur, 
+                                        sigma=sigma, 
+                                        a=2, b=wave_speed, steps=steps, 
+                                        amp_mean=ampi,
+                                        sigma_noise=sigma_noise,
+                                        phase_noise=phase_noise,
+                                        amp_noise=amp_noise)[0].T 
+                                        for ampi in np.linspace(0.5, 1.0, ncond)]
         self.data = np.asarray(self.data)
         self.time = np.arange(self.data.shape[1])
-        self.go_cue = 30
+        self.go_cue = 0
 
         self.full_data = self.data.copy()
         self.full_go_cue, self.full_time = self.go_cue, self.time.copy()
@@ -667,7 +665,6 @@ class SyntheticTravelingWave(NeuralDataset):
             'go_cue': self.go_cue,
             'sigma': self.sigma,
             'wave_speed': self.wave_speed,
-            'ncond': self.ncond,
             'sigma_noise': self.sigma_noise,
             'phase_noise': self.phase_noise,
             'amp_noise': self.amp_noise,
