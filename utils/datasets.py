@@ -213,59 +213,6 @@ class NeuralDataset:
         _, R2, _ = fit_running_wave(norm_data, self.time)
         return R2
 
-    def plot_dataset_gyration_plane(self, cond_n, start_pad, end_pad,
-                                    h5_save_dir, siz=0,
-                                    Q = 1., W = 1., ins_size=0.07, ins_borders = 0.3,
-                                    color_map=cmaps['lfp']): 
-        d_names = self.list_dataset_files(h5_save_dir)
-
-        # Design of Gyration Plane
-        fig, ax = plt.subplots(1, 1, figsize=(8, 8))
-        plt.plot([0., 1.], [0., 1.], c='grey', linestyle='dashed')
-        circle = patches.Circle((0, 0), radius=1, fill=False,
-                                color='grey', linestyle='dashed',
-                                lw=1.5)
-        ax.add_patch(circle)
-        plt.xlim([0, 1])
-        plt.ylim([0, 1])
-        plt.title('Gyration Plane')
-        plt.xlabel('Decay axis')
-        plt.ylabel('Rotation axis')
-        for dname in d_names:
-            info_d = load_h5_file('', dname)
-
-            datas = info_d['data'][:cond_n, :, :]
-            go_cue = info_d['go_cue']
-            time = info_d['time']
-            tstart = np.max([0, go_cue-start_pad])
-            tend = np.min([len(time)-go_cue-1, go_cue+end_pad])
-
-            # fit jPCA
-            datas_list = [datas[i] for i in range(datas.shape[0])]
-            jpca = jPCA.JPCA(num_jpcs=6)
-            (projected, _, _, _) = jpca.fit(datas_list, times=list(time), 
-                    tstart=tstart, tend=tend, subtract_cc_mean=True, num_pcs=6, pca=True)
-        
-            datas = subtract_cc_mean(soft_normalize(datas))
-            go_cue = go_cue - tstart
-            datas = datas[:, tstart:tend, :]
-            time = time[:tend]
-            _, _, _, tup = compute_lambdas(datas)
-
-            xnom = np.abs(np.real(tup[3][0])) + np.abs(np.real(tup[3][1]))
-            ynom = np.abs(np.imag(tup[3][0])) + np.abs(np.imag(tup[3][1]))
-            x = xnom / (np.abs(tup[3]).sum()) * Q
-            y = ynom / (np.abs(tup[3]).sum()) * W
-        
-            ins = ax.inset_axes([x - ins_size/2, y - ins_size/2, ins_size, ins_size], transform=ax.transData)
-            ins.set_aspect('equal', adjustable='datalim')
-            for axis in ['top', 'bottom', 'left', 'right']:
-                ins.spines[axis].set_linewidth(ins_borders)
-            plot_projections(projected, axis=ins, x_idx=0, y_idx=1, circle_size=siz, arrow_size=siz,
-                            colormap=color_map) 
-            ins.set_xticks([])
-            ins.set_yticks([])
-
 
 class GraspingSuresh(NeuralDataset):
     """
