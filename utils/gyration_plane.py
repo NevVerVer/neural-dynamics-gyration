@@ -55,7 +55,7 @@ def plot_dataset_gyration_plane(cond_n,
                                 save_name=None): 
     d_names = os.listdir(h5_save_dir)
 
-    fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+    fig, ax = plt.subplots(1, 1, figsize=(15, 15))
     for dname in d_names:
 
         info_d = load_h5_file(h5_save_dir, dname)

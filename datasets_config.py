@@ -8,13 +8,13 @@ from utils.datasets import (
     BehaviouralMante,
 )
 
-DATA_PATH = 'datasets/'
+DATA_PATH = ''
 data_pathes = {
-    'church': 'church_processed/church_dataset.h5',
-    'grasp': 'grasping_processed/Dataset4_Grasping_fg.h5',
-    'lfp': 'spanish_processed/Han_CO_20171207_LeftS1Area2.h5',
-    'khaild': 'kalidindi_processed/Patch_A5.h5',
-    'pfc': 'pfc_processed/A_color_movement_context_36cond.h5',
+    'church': 'preprocessed2h5/church_dataset.h5',
+    'grasp': 'preprocessed2h5/Dataset4_Grasping_fg.h5',
+    'lfp': 'preprocessed2h5/Han_CO_20171207_LeftS1Area2.h5',
+    'khaild': 'preprocessed2h5/Patch_A5.h5',
+    'pfc': 'preprocessed2h5/A_color_movement_context_36cond.h5',
 }
 
 pfc_params = {
