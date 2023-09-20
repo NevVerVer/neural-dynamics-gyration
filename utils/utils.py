@@ -253,6 +253,14 @@ def compute_lambdas(datas):
     Xeig = np.linalg.eigvals(X_dot.T @ X,)
     return Xeig
 
+def compute_gyration(datas):
+    Xeig = compute_lambdas(datas)
+    xnom = np.abs(np.real(Xeig[0])) + np.abs(np.real(Xeig[1]))
+    ynom = np.abs(np.imag(Xeig[0])) + np.abs(np.imag(Xeig[1]))
+    x = xnom / (np.abs(Xeig).sum())
+    y = ynom / (np.abs(Xeig).sum())
+    return x, y
+
 
 def func(t, mu, sigma, amp):
     return amp * np.exp(-((t - mu) / sigma)**2)

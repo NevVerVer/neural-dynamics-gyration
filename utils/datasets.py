@@ -59,32 +59,6 @@ from utils.color_palettes import (
     cmaps,
     )
 
-def compute_lambdas(datas):
-    """
-    Return: lambda_n, lambda_t, lambda_c
-    """
-    #nc, nt, nn = datas.shape
-    neuro_stack = np.concatenate(datas)
-    time_stack = np.concatenate(datas.transpose(0, 2, 1))
-    cond_stack = np.transpose(datas, (0, 2, 1)).reshape(datas.shape[0], -1)
-    NC = np.cov(neuro_stack.T)
-    TC = np.cov(time_stack.T)
-    CC = np.cov(cond_stack)
-    Neig = np.abs(np.sort(np.linalg.eigh(NC)[0])[::-1])
-    Teig = np.abs(np.sort(np.linalg.eigh(TC)[0])[::-1])
-    Ceig = np.abs(np.sort(np.linalg.eigh(CC)[0])[::-1])
-
-    #compute differential covariance
-    X = np.concatenate([x[:-1] for x in datas])
-    X_dot = np.concatenate([np.diff(x, axis=0) for x in datas])
-
-    Xeig = np.linalg.eigvals(X_dot.T @ X,)
-    Xeig_real = np.abs(np.real(Xeig)[0])
-    Xeig_imag = np.abs(np.imag(Xeig)[0])
-    Xeig_sum = np.abs(Xeig.sum())
-
-    return Neig[0] / Neig.sum(), Teig[0] / Teig.sum(), Ceig[0] / Ceig.sum(), (Xeig_real, Xeig_imag, Xeig_sum, Xeig)
-
 
 class NeuralDataset:
     """
@@ -147,6 +121,8 @@ class NeuralDataset:
 
     def save2h5(self, fname, fpath):
         self.create_info_dict()
+        if os.path.isdir(fpath) == False:
+            os.mkdir(fpath)
         save_h5_file(fpath, fname, self.info_d)
 
     # Ploting functions
@@ -576,28 +552,29 @@ class SyntheticTravelingWave(NeuralDataset):
 
     def load_additional_info(self):
         self.sigma = self.info_d['sigma']
-        self.wave_speed = self.info_d['wave_speed']
+        self.b = self.info_d['wave_speed']
         self.sigma_noise = self.info_d['sigma_noise']
         self.phase_noise = self.info_d['phase_noise']
         self.amp_noise = self.info_d['amp_noise']
 
-    def preprocess_data(self, sigma, wave_speed, ncond, nneur, t_max, steps,
-                        sigma_noise=0.0, phase_noise=0.0, amp_noise=0.0):
+    def preprocess_data(self, sigma, a, b, ncond, N, t_max, steps,
+                        sigma_noise=0.0, phase_noise=0.0, amp_noise=0.0, amp_range=[0.5, 1.0]):
         print('Generating datasets!')
         self.sigma = sigma
         self.steps = steps
-        self.wave_speed = wave_speed
+        self.a = a
+        self.b = b
         self.sigma_noise = sigma_noise
         self.phase_noise = phase_noise
         self.amp_noise = amp_noise
-        self.data = [generate_response(t_max=t_max, N=nneur, 
+        self.data = [generate_response(t_max=t_max, N=N, 
                                         sigma=sigma, 
-                                        a=2, b=wave_speed, steps=steps, 
+                                        a=a, b=b, steps=steps, 
                                         amp_mean=ampi,
                                         sigma_noise=sigma_noise,
                                         phase_noise=phase_noise,
                                         amp_noise=amp_noise)[0].T 
-                                        for ampi in np.linspace(0.5, 1.0, ncond)]
+                                        for ampi in np.linspace(*amp_range, ncond)]
         self.data = np.asarray(self.data)
         self.time = np.arange(self.data.shape[1])
         self.go_cue = 0
@@ -611,7 +588,7 @@ class SyntheticTravelingWave(NeuralDataset):
             'time': self.time,
             'go_cue': self.go_cue,
             'sigma': self.sigma,
-            'wave_speed': self.wave_speed,
+            'wave_speed': self.b,
             'sigma_noise': self.sigma_noise,
             'phase_noise': self.phase_noise,
             'amp_noise': self.amp_noise,
