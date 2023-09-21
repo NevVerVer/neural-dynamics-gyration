@@ -1,8 +1,8 @@
 """
 Created on Sat September 17 21:15:06 2023
 
-Description: Datasets class implementation for:
-https://www.biorxiv.org/content/10.1101/2023.09.11.557230v1
+Description: Datasets class implementation for
+Paper url: https://www.biorxiv.org/content/10.1101/2023.09.11.557230v1
 
 @author: Ekaterina Kuzmina, ekaterina.kuzmina@skoltech.ru
 @author: Dmitrii Kriukov, dmitrii.kriukov@skoltech.ru
@@ -45,9 +45,13 @@ from utils.vis import (
     plot_R2_fitting,
     plot_all_stats
 )
-from utils.utils import (
+
+from utils.shuffling import (
     shuffle_data,
-    shuffling_CMPT,
+    shuffling_CMPT
+)
+
+from utils.utils import (
     soft_normalize,
     fit_running_wave,
     subtract_cc_mean,
@@ -107,8 +111,7 @@ class NeuralDataset:
                                 go_cue_time = self.go_cue,
                                 keep_var=keep_var)
         elif shuffling_type == 'cmpt':
-            # self.data = 
-            pass # TODO
+            self.data = shuffling_CMPT(self.data, threshold=0.95)
 
     def print_dataset_info(self): 
         print(f'Dataset shape: {self.data.shape}')
@@ -392,7 +395,8 @@ class ReachingChurchland(NeuralDataset):
         print('No preprocessing needed! Loaded.')
 
     def create_info_dict(self):
-        self.info_d = {'data': self.data,
+        self.info_d = {
+            'data': self.data,
             'time': self.time,
             'go_cue': self.go_cue,
             'dataset_dir': self.dataset_dir}

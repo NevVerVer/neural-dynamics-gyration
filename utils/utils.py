@@ -2,7 +2,7 @@
 Created on Sat September 16 21:15:06 2023
 
 Description: Additional utilities functions for:
-TODO: https://www.biorxiv.org/content/10.1101/2023.09.11.557230v1
+Paper url: https://www.biorxiv.org/content/10.1101/2023.09.11.557230v1
 
 @author: Ekaterina Kuzmina, ekaterina.kuzmina@skoltech.ru
 @author: Dmitrii Kriukov, dmitrii.kriukov@skoltech.ru
@@ -27,100 +27,6 @@ def soft_normalize(datas, thtrsh = 1e-2):
 def subtract_cc_mean(datas):
     return datas - np.mean(datas, axis=0)
     
-    
-def shuffle_data(datas, times, shuffle_type, go_cue_time, keep_var=False):
-    """
-    Shufflings of data from paper:
-    "Neural Population Dynamics During Reaching", Churchland et al., 2012
-
-    All 3 base shuffle controls are based on the distinction between preparatory
-    activity (which is left intact) and peri-movement activity.
-    1 type: 
-        The pattern of peri-movement activity was inverted for half of the
-        conditions, selected at random. The inversion was performed around
-        the dividing time-point, such that continuity with preparatory
-        activity was preserved. This procedure was performed separately 
-        for each neuron.
-    2 type:
-        Similar to the 1st, but inverted the peri-movement activity
-        pattern for all conditions. 
-    3 type: 
-        Randomly reassigned the peri-movement activity from one condition
-        to the preparatory activity from another. The beginning of the
-        peri-movement pattern was simply appended to the final firing rate
-        during the preparatory state, such that there was no discontinuity.
-        The same reassignment was performed for all neurons.
-    """
-
-    inv_start = go_cue_time
-    shuffled_data = np.stack(datas)
-    n_cond, n_time, n_neuron = shuffled_data.shape
-    
-    if shuffle_type == 1:
-        s = np.random.binomial(1, .5, (n_neuron, n_cond))
-
-        for neuron_idx in range(n_neuron):
-            f = s[neuron_idx]
-            for cond_idx in range(n_cond):
-                if f[cond_idx]:
-                    d = shuffled_data[cond_idx, :, neuron_idx]
-                    origin = d[inv_start]
-
-                    d[inv_start:] = ((d[inv_start:] - origin) * -1) + origin
-                    shuffled_data[cond_idx, :, neuron_idx] = d
-#         reversed_neuron_idxs = np.where(s[0]) 
-
-    elif shuffle_type == 2:
-        for neuron_idx in range(n_neuron):
-            for cond_idx in range(n_cond):
-                d = shuffled_data[cond_idx, :, neuron_idx]
-                origin = d[inv_start]
-
-                d[inv_start:] = ((d[inv_start:] - origin) * -1) + origin
-                shuffled_data[cond_idx, :, neuron_idx] = d
-                      
-    elif shuffle_type == 3:
-
-        p1 = np.arange(0, n_cond)
-        np.random.shuffle(p1)
-        p2 = p1[n_cond // 2 : n_cond]
-        p1 = p1[0 : n_cond // 2]
-        dif_distr = []
-        for neuron_idx in range(n_neuron):
-            for cond_idx in range(n_cond//2):
-
-                d = shuffled_data[p1[cond_idx], :, neuron_idx]
-                d2 = shuffled_data[p2[cond_idx], :, neuron_idx]
-
-                d_ = d.copy()
-                d2_ = d2.copy()
-
-                origin, d2_origin = d[inv_start], d2[inv_start]
-                dif = np.abs(origin - d2_origin)
-                dif_distr.append(dif)
-                if d2_origin > origin:
-                    d[inv_start:] = d2_[inv_start:] - dif
-                    d2[inv_start:] = d_[inv_start:] + dif
-
-                elif d2_origin < origin:
-                    d[inv_start:] = d2_[inv_start:] + dif
-                    d2[inv_start:] = d_[inv_start:] - dif
-
-                else:
-                    d[inv_start:] = d2_[inv_start:]
-                    d2[inv_start:] = d_[inv_start:]
-
-                shuffled_data[p1[cond_idx], :, neuron_idx] = d
-                shuffled_data[p2[cond_idx], :, neuron_idx] = d2
-    else:
-        raise ValueError('Incorrect shuffle type')
-    
-    return shuffled_data
-
-
-def shuffling_CMPT(): # TODO
-    pass
-
 
 def pca_rotation(datas, start, end, n_pca=6, sub_mean=True,
                  random_state=None):

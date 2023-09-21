@@ -1,7 +1,9 @@
 """
 Created on Sat September 16 21:15:06 2023
+
 Description: Controller class implementations for:
-TODO: paper url here
+Paper url: https://www.biorxiv.org/content/10.1101/2023.09.11.557230v1
+
 @author: Ekaterina Kuzmina, ekaterina.kuzmina@skoltech.ru
 @author: Dmitrii Kriukov, dmitrii.kriukov@skoltech.ru
 """
@@ -12,7 +14,8 @@ import seaborn as sns
 from sklearn.decomposition import PCA
 from utils.color_palettes import blue_yellow_cmap
 from utils.utils import subtract_cc_mean, soft_normalize, compute_lambdas
-from utils.utils import shuffle_data, compute_curvature, pca_rotation
+from utils.utils import compute_curvature, pca_rotation
+from utils.shuffling import shuffle_data
 import jPCA
 from jPCA.util import plot_projections
 from utils.utils import fit_running_wave
