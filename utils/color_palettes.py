@@ -85,5 +85,5 @@ blue_yellow_cmap = lambda : color.LinearSegmentedColormap.from_list("", ['#382db
 cmaps = {'lfp': YP1(),
         'church': GR1(),
         'grasp': RB1(),
-        'khalid': YS1(),
+        'kalid': YS1(),
         'pfc': BG1()}

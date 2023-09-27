@@ -22,6 +22,7 @@ from utils.utils import fit_running_wave
 
 from utils.data_processing import load_h5_file
 from utils.color_palettes import GR1, RB1, YP1, YS1, BG1
+from jPCA.util import red_green_cmap
 import os
 
 
@@ -147,8 +148,8 @@ def plot_peth(datas_list, times, subtract_mean, go_cue=0,
 
 
 def build_jPCA(data, gc, ts, te, subtract_mean, shuffling=None,
-               siz=0.005, save_name=None):
-
+               siz=0.005, save_name=None, jpca_cmap=red_green_cmap()):
+    
     cond_num = data.shape[0]
     datas_list = [data[i] for i in range(cond_num)]
     times = list(np.arange(datas_list[0].shape[0]))
@@ -166,8 +167,10 @@ def build_jPCA(data, gc, ts, te, subtract_mean, shuffling=None,
     
     if save_name:
         fig, axes = plt.subplots(1, 2, figsize=(10, 5))
-        plot_projections(projected, axis=axes[0], x_idx=0, y_idx=1, circle_size=siz, arrow_size=siz) 
-        plot_projections(projected, axis=axes[1], x_idx=2, y_idx=3, circle_size=siz, arrow_size=siz) 
+        plot_projections(projected, axis=axes[0], x_idx=0, y_idx=1, circle_size=siz,
+                         arrow_size=siz, colormap=jpca_cmap) 
+        plot_projections(projected, axis=axes[1], x_idx=2, y_idx=3, circle_size=siz,
+                         arrow_size=siz, colormap=jpca_cmap) 
         axes[0].set_title("jPCA Plane 1")
         axes[1].set_title("jPCA Plane 2")
         plt.tight_layout()
@@ -177,10 +180,12 @@ def build_jPCA(data, gc, ts, te, subtract_mean, shuffling=None,
         plt.close()
     else:
         print('jPCA')
-        plot_projections(projected, x_idx=0, y_idx=1, circle_size=siz, arrow_size=siz)
+        plot_projections(projected, x_idx=0, y_idx=1, circle_size=siz, arrow_size=siz, 
+                         colormap=jpca_cmap)
 
 
-def build_pca(data, time, ts, te, sub_mean=True, siz=0.001, save_name=None):
+def build_pca(data, time, ts, te, sub_mean=True, siz=0.001, save_name=None,
+              pca_cmap=red_green_cmap()):
     datas_list = [i for i in data]
     times = list(time)
 
@@ -189,8 +194,10 @@ def build_pca(data, time, ts, te, sub_mean=True, siz=0.001, save_name=None):
                                       sub_mean=sub_mean, random_state=228)
     if save_name:
         fig, axes = plt.subplots(1, 2, figsize=(10, 5))
-        plot_projections(data_list, axis=axes[0], x_idx=0, y_idx=1, circle_size=siz, arrow_size=siz) 
-        plot_projections(data_list, axis=axes[1], x_idx=2, y_idx=3, circle_size=siz, arrow_size=siz) 
+        plot_projections(data_list, axis=axes[0], x_idx=0, y_idx=1, circle_size=siz,
+                         arrow_size=siz, colormap=pca_cmap) 
+        plot_projections(data_list, axis=axes[1], x_idx=2, y_idx=3, circle_size=siz,
+                         arrow_size=siz, colormap=pca_cmap) 
         axes[0].set_title("PCA Plane 1")
         axes[1].set_title("PCA Plane 2")
         plt.tight_layout()
@@ -200,7 +207,8 @@ def build_pca(data, time, ts, te, sub_mean=True, siz=0.001, save_name=None):
         plt.close()
     else:
         print('PCA')
-        plot_projections(data_list, x_idx=0, y_idx=1, circle_size=siz, arrow_size=siz) 
+        plot_projections(data_list, x_idx=0, y_idx=1, circle_size=siz,
+                         arrow_size=siz, colormap=pca_cmap) 
 
 
 def plot_clusterization(datas_list, times, sub_mean=False, save_name=None):

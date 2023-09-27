@@ -8,53 +8,60 @@ Published in ..., **TODO doi, etc** | [bioRxiv](https://www.biorxiv.org/content/
 
 This repository contains code from a research paper focused on the analysis of neural activity data. Our work delves into the exploration and characterization of *rotational dynamic* prevalent in various neural datasets. We introduce a mathematical framework, informed by our research, designed to assess and quantify the "rotationess" of datasets. This framework leverages **Gyration Numbers**, a complex-valued metric derived from the eigenvalue decomposition of the differential covariance matrix of the data. The resulting **Gyration Plane** facilitates the comparison and simultaneous analysis of multiple datasets.
 
-## Table of Contents??
-
 ## Badges ??
 
 ## Installation
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/NevVerVer/neural-dynamics-gyration.git
-   ```
+```bash
+git clone https://github.com/NevVerVer/neural-dynamics-gyration.git
+```
 
 2. Navigate to the repository directory:
-   ```bash
-   cd neural-dynamics-gyration
-   ```
+```bash
+cd neural-dynamics-gyration
+```
 
 3. Install the required packages:
+```bash
 pip install -r requirements.txt
+```
+
 
 ## Datasets Downloading
 
-1. Run script that downloads and unzip data: `bash prepare_data.sh`. Or download archive with datasets manually from [here](https://drive.google.com/drive/folders/1AWO8XZpLBW1fkp5ylF6-w6J8gYcnnOkp?usp=sharing). You can also download datasets from the original source from here ... # TODO link to table.
-
+1. Run script that downloads and unzip data: `bash prepare_data.sh` or `bash prepare_preproc_datasets.sh`. Or download archive with datasets manually from [here](https://drive.google.com/drive/folders/1AWO8XZpLBW1fkp5ylF6-w6J8gYcnnOkp?usp=sharing). You can also download datasets from the original source from here ... # TODO link to table.
+`dataset.zip` contains raw data, as it is available at origin sourse. `preprocessed2h5.zip` contains already prerocessed datasets, saved to .h5 file as dictionary.
  
-2. Add path to downloaded datasets to `config.py` file 
+2. Add path to downloaded datasets to `datasets_config.py` file for convinience.
 
 ## Usage
 ### Data Preparation
-Place your data in `./datasets/` directory or execture script `smth.py` to download data used in study.
-If you use datasets used in study, you can see how to pre-process and save datasets to `h5` file in notebook `datasets_analysis.ipynb`. If using other dataset, you can use parent class  `NeuralDataset` (from `utils/datasets.py`) and add specific methods to load data and pre-process.
+Place your data in `./datasets/` directory or execture script `prepare_data.sh` to download data used in the study.
+If you would like to work with datasets used in study, you can see how to pre-process and save datasets to `h5` file in notebook `datasets_analysis.ipynb`. If using other dataset, you can use parent class  `NeuralDataset` (from `utils/datasets.py`) and add specific methods to load data and pre-process.
 
-### Main Experiments
-python main_experiment.py
-Note: Additional configurations and parameters are provided in config.yml.
+### Main Experiments 
+#### Content of Repository
+
+- `datasets_analysis.ipynb` - contains tutorial on how to use special class created for working with datasets. It is easy modifiable and allows to use all visualization functions that were used in the study. Have code that was used to render **Fig. S2-S3-S4** and **Fig. 4** in our paper.
+
+- `gyration_plane_tutorial.ipynb` - contains ...
+
+- `traveling_wave_model.ipnyb` - contains tutorial on how to use synthetic data model we proposed. It is a Gaussian kernel, ...
+
 **TODO** Notebooks description
-**TODO** Datasets used in this study (table with links)
 
-This is `inline code`.
+#### Gyration Plane
 
-```python
-def hello_world():
-print("Hello, World!")
-```
-Implemented shuffling CMPT, CR from TODO: links and dois and a bit of description 
+**TODO**: ...
+
+#### Shuffling Procedures
+In `utils/shuffling.py` you can find implementation of *Shuffling Procedures* that are widely used for validation of "importance" of rotational dynamics in data.
+We implemented three types of shufflings from original [Churchland et al.](https://doi.org/10.1038/nature11129), and CMPT shuffling from [Micaels et al.](https://doi.org/10.1371/journal.pcbi.1005175) Feel free to use them!
+
 
 ## Contributing
-We welcome contributions to this repository. If you're interested in enhancing the code or adding new features, please submit a pull request. For major changes, please open an issue first to discuss your ideas.
+We welcome contributions to this repository. If you're found errors in code or experiments, please open an issue to discuss your ideas.
 
 ## License
 This project is licensed under the XYZ License - see the LICENSE file for details.
@@ -63,15 +70,14 @@ This project is licensed under the XYZ License - see the LICENSE file for detail
 If you use the code or the findings from our paper, please cite:
 
 Author A., Author B., Author C., (Year). Unveiling rotational structure in neural data. JournalName, volume(issue), pages.
-
 **TODO add citation**
 **TODO add bibtex**
 
 Special thanks to @nosmokingsurfer for their valuable feedback and suggestions.
-Thanks to @bantin for the [jPCA implementation](https://github.com/bantin/jPCA)
+Thanks to @bantin for the [jPCA implementation](https://github.com/bantin/jPCA).
 
 ## Contact
-For any questions or clarifications, please reach out to: ekaterina.kuzmina@skoltech.ru
+For any questions or clarifications, please reach out to: *ekaterina.kuzmina@skoltech.ru*
 
 ## Datasets Used in Study
 | Name & Authors                                                                                                                    | Year | Brain Areas                                                                                    | Behavior                                                                                              | Source                                                                                                                                                                                     | Original Paper                              |

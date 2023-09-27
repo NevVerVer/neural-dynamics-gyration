@@ -62,6 +62,7 @@ from utils.color_palettes import (
     bg_gray_color,
     cmaps,
     )
+from jPCA.util import red_green_cmap
 
 
 class NeuralDataset:
@@ -75,6 +76,7 @@ class NeuralDataset:
     def __init__(self, dataset_dir):
         self.dataset_dir = dataset_dir
         self.preproc_h5 = False
+        self.cmap = red_green_cmap()
 
     def load_data(self):
         raise NotImplementedError("Subclasses must implement this method")
@@ -105,14 +107,16 @@ class NeuralDataset:
         self.time = self.full_time.copy()
 
     def shuffle_data(self, shuffling_type, keep_var=False):
-        if shuffling_type in [1, 2, 3]:
+        if shuffling_type in ['1', '2', '3']:
             self.data = shuffle_data(self.data, self.time, 
                                 shuffle_type=shuffling_type,
                                 go_cue_time = self.go_cue,
                                 keep_var=keep_var)
         elif shuffling_type == 'cmpt':
             self.data = shuffling_CMPT(self.data, threshold=0.95)
-
+        else:
+            raise ValueError('Wrong shuffling type!')
+        
     def print_dataset_info(self): 
         print(f'Dataset shape: {self.data.shape}')
         print(f'Go cue: {self.go_cue}')
@@ -161,13 +165,15 @@ class NeuralDataset:
                     subtract_mean=subtract_mean,
                     shuffling=None,
                     siz=arrow_size,
-                    save_name=save_name)
+                    save_name=save_name,
+                    jpca_cmap=self.cmap)
 
     def plot_pca(self, tstart, tend, subtract_mean=True,
                  arrow_size=0.001, save_name=None):
         build_pca(self.data, self.time, tstart, tend,
                     sub_mean=subtract_mean,
-                     siz=arrow_size, save_name=save_name)
+                     siz=arrow_size, save_name=save_name,
+                     pca_cmap=self.cmap)
 
     def plot_eigenpca(self, npca=4, subtract_mean=False, save_name=None):
         plot_eigenPCA(self.data, npca=npca,
@@ -221,6 +227,13 @@ class GraspingSuresh(NeuralDataset):
         self.area = self.info_d['area']
         self.sigma = self.info_d['sigma']
 
+        self.cmap_name = self.info_d.get('cmap_name')
+        if self.cmap_name is not None:
+            self.cmap_name = self.cmap_name.decode("utf-8")
+        else:
+            self.cmap_name = 'church'
+        self.cmap = cmaps[self.cmap_name]
+
     def preprocess_data(self, sigma, dataset_idx, align_cue='wsm', fixed_align_cue=None,
                         freq_sampling=0.01, signal_len='max', max_len=2800, area='M1'):
         # Write preproc parameters to class vars  
@@ -265,6 +278,15 @@ class GraspingSuresh(NeuralDataset):
 
         self.full_data = self.data.copy()
         self.full_go_cue, self.full_time = self.go_cue, self.time.copy()
+
+        self.cmap_name = self.data_dict.get('cmap_name')
+        if self.cmap_name is not None:
+            self.cmap_name = self.cmap_name.decode("utf-8")
+        else:
+            self.cmap_name = 'church'
+        self.cmap = cmaps[self.cmap_name]
+
+
         print(f'Data pre-processed! Shape: {self.data.shape}, Go cue={self.go_cue}')
 
     def extract_cues(self, dataset_idx):
@@ -304,7 +326,9 @@ class GraspingSuresh(NeuralDataset):
                        'freq_sampling': self.freq_sampling,
                        'area': self.area,
                        'sigma': self.sigma,
-                       'dataset_dir': self.dataset_dir}
+                       'dataset_dir': self.dataset_dir,
+                       'cmap_name': self.cmap_name}
+
 
 
 class ReachingGallego(NeuralDataset):
@@ -333,7 +357,14 @@ class ReachingGallego(NeuralDataset):
         self.area = self.info_d['area']
         self.sigma = self.info_d['sigma']
         self.dataset_dir = self.info_d['dataset_dir']
-                
+
+        self.cmap_name = self.data_dict.get('cmap_name')
+        if self.cmap_name is not None:
+            self.cmap_name = self.cmap_name.decode("utf-8")
+        else:
+            self.cmap_name = 'church'
+        self.cmap = cmaps[self.cmap_name]
+
     def preprocess_data(self, sigma, signal_len='max', area='M1'):
         self.sigma = sigma
         self.signal_len = signal_len
@@ -349,6 +380,14 @@ class ReachingGallego(NeuralDataset):
 
         self.full_data = self.data.copy()
         self.full_go_cue, self.full_time = self.go_cue, self.time.copy()
+
+        self.cmap_name = self.data_dict.get('cmap_name')
+        if self.cmap_name is not None:
+            self.cmap_name = self.cmap_name.decode("utf-8")
+        else:
+            self.cmap_name = 'church'
+        self.cmap = cmaps[self.cmap_name]
+
         print(f'Data pre-processed! Shape: {self.data.shape}, Go cue={self.go_cue}')
 
     def create_info_dict(self):
@@ -358,7 +397,9 @@ class ReachingGallego(NeuralDataset):
             'signal_len_cropping': self.signal_len,
             'area': self.area,
             'sigma': self.sigma,
-            'dataset_dir': self.dataset_dir}
+            'dataset_dir': self.dataset_dir,
+            'cmap_name': self.cmap_name}
+
 
 
 class ReachingChurchland(NeuralDataset):
@@ -383,6 +424,13 @@ class ReachingChurchland(NeuralDataset):
 
     def load_additional_info(self):
         self.dataset_dir = self.info_d['dataset_dir']
+        
+        self.cmap_name = self.data_dict.get('cmap_name')
+        if self.cmap_name is not None:
+            self.cmap_name = self.cmap_name.decode("utf-8")
+        else:
+            self.cmap_name = 'church'
+        self.cmap = cmaps[self.cmap_name]
 
     def preprocess_data(self):
         self.data = np.asarray(self.data_dict[0])
@@ -392,6 +440,14 @@ class ReachingChurchland(NeuralDataset):
 
         self.full_data = self.data.copy()
         self.full_go_cue, self.full_time = self.go_cue, self.time.copy()
+
+        self.cmap_name = self.data_dict.get('cmap_name')
+        if self.cmap_name is not None:
+            self.cmap_name = self.cmap_name.decode("utf-8")
+        else:
+            self.cmap_name = 'church'
+        self.cmap = cmaps[self.cmap_name]
+
         print('No preprocessing needed! Loaded.')
 
     def create_info_dict(self):
@@ -399,7 +455,8 @@ class ReachingChurchland(NeuralDataset):
             'data': self.data,
             'time': self.time,
             'go_cue': self.go_cue,
-            'dataset_dir': self.dataset_dir}
+            'dataset_dir': self.dataset_dir,
+            'cmap_name': self.cmap_name}
 
 
 class ReachingKalidindi(NeuralDataset):
@@ -427,6 +484,13 @@ class ReachingKalidindi(NeuralDataset):
     def load_additional_info(self):
         self.dataset_dir = self.info_d['dataset_dir']
 
+        self.cmap_name = self.data_dict.get('cmap_name')
+        if self.cmap_name is not None:
+            self.cmap_name = self.cmap_name.decode("utf-8")
+        else:
+            self.cmap_name = 'church'
+        self.cmap = cmaps[self.cmap_name]
+        
     def preprocess_data(self):
         self.data = np.asarray([self.data_dict['Data_struct'][0][i][0] for i in range(8)])
         # np.asarray(self.data_dict['Data_struct'][0][0][1][0])
@@ -435,13 +499,23 @@ class ReachingKalidindi(NeuralDataset):
 
         self.full_data = self.data.copy()
         self.full_go_cue, self.full_time = self.go_cue, self.time.copy()
+
+        self.cmap_name = self.data_dict.get('cmap_name')
+        if self.cmap_name is not None:
+            self.cmap_name = self.cmap_name.decode("utf-8")
+        else:
+            self.cmap_name = 'church'
+        self.cmap = cmaps[self.cmap_name]
+
         print('No preprocessing needed! Loaded.')
 
     def create_info_dict(self):
         self.info_d = {'data': self.data,
             'time': self.time,
             'go_cue': self.go_cue,
-            'dataset_dir': self.dataset_dir}
+            'dataset_dir': self.dataset_dir,
+            'cmap_name': self.cmap_name}
+
 
 
 class BehaviouralMante(NeuralDataset):
@@ -468,7 +542,14 @@ class BehaviouralMante(NeuralDataset):
         self.cond_sorting = self.info_d['cond_sorting']
         self.sigma = self.info_d['sigma']
         self.dataset_dir = self.info_d['dataset_dir']
-                
+
+        self.cmap_name = self.data_dict.get('cmap_name')
+        if self.cmap_name is not None:
+            self.cmap_name = self.cmap_name.decode("utf-8")
+        else:
+            self.cmap_name = 'church'
+        self.cmap = cmaps[self.cmap_name]
+
     def preprocess_data(self, sigma, cond_sorting):
         self.sigma = sigma
         self.cond_sorting = cond_sorting
@@ -502,11 +583,20 @@ class BehaviouralMante(NeuralDataset):
                                                         sigma=sigma, mode='constant')
                     self.data[i, :, neuron] = avrg_smoth_cond
                     i += 1
-            self.go_cue = 0
-            self.time = np.arange(0, nt)
+        self.go_cue = 0
+        self.time = np.arange(0, nt)
 
-            self.full_data = self.data.copy()
-            self.full_go_cue, self.full_time = self.go_cue, self.time.copy()
+        self.full_data = self.data.copy()
+        self.full_go_cue, self.full_time = self.go_cue, self.time.copy()
+
+        self.cmap_name = self.data_dict.get('cmap_name')
+        if self.cmap_name is not None:
+            self.cmap_name = self.cmap_name.decode("utf-8")
+        else:
+            self.cmap_name = 'church'
+        self.cmap = cmaps[self.cmap_name]
+
+        print(f'Data pre-processed! Shape: {self.data.shape}, Go cue={self.go_cue}')
 
     def extract_idxes(self, cond_sorting):
         idx_list = []
@@ -547,7 +637,8 @@ class BehaviouralMante(NeuralDataset):
                        'go_cue': self.go_cue,
                        'cond_sorting': self.cond_sorting,
                        'sigma': self.sigma,
-                       'dataset_dir': self.dataset_dir}
+                       'dataset_dir': self.dataset_dir,
+                       'cmap_name': self.cmap_name}
         
 
 class SyntheticTravelingWave(NeuralDataset):
@@ -561,8 +652,16 @@ class SyntheticTravelingWave(NeuralDataset):
         self.phase_noise = self.info_d['phase_noise']
         self.amp_noise = self.info_d['amp_noise']
 
+        self.cmap_name = self.data_dict.get('cmap_name')
+        if self.cmap_name is not None:
+            self.cmap_name = self.cmap_name.decode("utf-8")
+        else:
+            self.cmap_name = 'church'
+        self.cmap = cmaps[self.cmap_name]
+
     def preprocess_data(self, sigma, a, b, ncond, N, t_max, steps,
-                        sigma_noise=0.0, phase_noise=0.0, amp_noise=0.0, amp_range=[0.5, 1.0]):
+                        sigma_noise=0.0, phase_noise=0.0, amp_noise=0.0,
+                        amp_range=[0.5, 1.0]):
         print('Generating datasets!')
         self.sigma = sigma
         self.steps = steps
@@ -586,6 +685,15 @@ class SyntheticTravelingWave(NeuralDataset):
         self.full_data = self.data.copy()
         self.full_go_cue, self.full_time = self.go_cue, self.time.copy()
 
+        self.cmap_name = self.data_dict.get('cmap_name')
+        if self.cmap_name is not None:
+            self.cmap_name = self.cmap_name.decode("utf-8")
+        else:
+            self.cmap_name = 'church'
+        self.cmap = cmaps[self.cmap_name]
+
+        print(f'Data pre-processed! Shape: {self.data.shape}, Go cue={self.go_cue}')
+
     def create_info_dict(self):
         self.info_d = {
             'data': self.data,
@@ -596,4 +704,5 @@ class SyntheticTravelingWave(NeuralDataset):
             'sigma_noise': self.sigma_noise,
             'phase_noise': self.phase_noise,
             'amp_noise': self.amp_noise,
+            'cmap_name': self.cmap_name,
         }

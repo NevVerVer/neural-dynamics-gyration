@@ -13,7 +13,7 @@ data_pathes = {
     'church': 'preprocessed2h5/church_dataset.h5',
     'grasp': 'preprocessed2h5/Dataset4_Grasping_fg.h5',
     'lfp': 'preprocessed2h5/Han_CO_20171207_LeftS1Area2.h5',
-    'khaild': 'preprocessed2h5/Patch_A5.h5',
+    'kalid': 'preprocessed2h5/Patch_A5.h5',
     'pfc': 'preprocessed2h5/A_color_movement_context_36cond.h5',
 }
 
@@ -32,7 +32,7 @@ pfc_params = {
     'cmap': BG1(),
     'bins': 40,
     'hist_space': 150,
-    'khalid': False,
+    'kalid': False,
     'pfc': True,
     'fs': 1,
                  }
@@ -51,7 +51,7 @@ church_params = {
     'cmap': GR1(),
     'bins': 40,
     'hist_space': 750,
-    'khalid': False,
+    'kalid': False,
     'pfc': False,
     'fs': 10,  # ms
                  }
@@ -70,7 +70,7 @@ grasp_params = {
     'cmap': RB1(),
     'bins': 55,
     'hist_space': 250,
-    'khalid': False,
+    'kalid': False,
     'pfc': False,
     'fs': 10,  # ms
                  }
@@ -89,11 +89,11 @@ lfp_params = {
     'cmap': YP1(),
     'bins': 35,
     'hist_space': 50,
-    'khalid': False,
+    'kalid': False,
     'pfc': False,
     'fs': 30,
                  }
-khalid_params = {
+kalid_params = {
     'name': 'Kalidindi et al.',
     'class': ReachingKalidindi,
     'size': '[8 x 30 x 70]',
@@ -108,7 +108,7 @@ khalid_params = {
     'cmap': YS1(),
     'bins': 40,
     'hist_space': 30,
-    'khalid': True,
+    'kalid': True,
     'pfc': False,
     'fs': 10,  # ms
                  }
@@ -118,5 +118,5 @@ dataset_params = {
     'church_params': church_params,
     'grasp_params': grasp_params,
     'lfp_params': lfp_params,
-    'khalid_params': khalid_params,
+    'kalid_params': kalid_params,
 }

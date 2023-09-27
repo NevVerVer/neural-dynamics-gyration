@@ -40,7 +40,7 @@ def shuffle_data(datas, times, shuffle_type, go_cue_time, keep_var=False):
     shuffled_data = np.stack(datas)
     n_cond, n_time, n_neuron = shuffled_data.shape
     
-    if shuffle_type == 1:
+    if shuffle_type == '1':
         s = np.random.binomial(1, .5, (n_neuron, n_cond))
 
         for neuron_idx in range(n_neuron):
@@ -54,7 +54,7 @@ def shuffle_data(datas, times, shuffle_type, go_cue_time, keep_var=False):
                     shuffled_data[cond_idx, :, neuron_idx] = d
 #         reversed_neuron_idxs = np.where(s[0]) 
 
-    elif shuffle_type == 2:
+    elif shuffle_type == '2':
         for neuron_idx in range(n_neuron):
             for cond_idx in range(n_cond):
                 d = shuffled_data[cond_idx, :, neuron_idx]
@@ -63,7 +63,7 @@ def shuffle_data(datas, times, shuffle_type, go_cue_time, keep_var=False):
                 d[inv_start:] = ((d[inv_start:] - origin) * -1) + origin
                 shuffled_data[cond_idx, :, neuron_idx] = d
                       
-    elif shuffle_type == 3:
+    elif shuffle_type == '3':
 
         p1 = np.arange(0, n_cond)
         np.random.shuffle(p1)
