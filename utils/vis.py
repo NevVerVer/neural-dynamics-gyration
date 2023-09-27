@@ -10,20 +10,26 @@ Paper url: https://www.biorxiv.org/content/10.1101/2023.09.11.557230v1
 
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 import seaborn as sns
-from sklearn.decomposition import PCA
-from utils.color_palettes import blue_yellow_cmap
-from utils.utils import subtract_cc_mean, soft_normalize, compute_lambdas
-from utils.utils import compute_curvature, pca_rotation
-from utils.shuffling import shuffle_data
+
+from utils.utils import (
+    subtract_cc_mean,
+    soft_normalize,
+    compute_lambdas,
+    compute_curvature,
+    pca_rotation,
+    fit_running_wave
+    )
 import jPCA
-from jPCA.util import plot_projections
-from utils.utils import fit_running_wave
+from jPCA.util import plot_projections, red_green_cmap
+from sklearn.decomposition import PCA
 
 from utils.data_processing import load_h5_file
-from utils.color_palettes import GR1, RB1, YP1, YS1, BG1
-from jPCA.util import red_green_cmap
-import os
+from utils.shuffling import shuffle_data
+from utils.color_palettes import (
+    blue_yellow_cmap,
+    GR1, RB1, YP1, YS1, BG1)
 
 
 cmaps = {'lfp': YP1(),

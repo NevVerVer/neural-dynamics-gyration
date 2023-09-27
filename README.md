@@ -40,20 +40,24 @@ pip install -r requirements.txt
 Place your data in `./datasets/` directory or execture script `prepare_data.sh` to download data used in the study.
 If you would like to work with datasets used in study, you can see how to pre-process and save datasets to `h5` file in notebook `datasets_analysis.ipynb`. If using other dataset, you can use parent class  `NeuralDataset` (from `utils/datasets.py`) and add specific methods to load data and pre-process.
 
-### Main Experiments 
-#### Content of Repository
+### Content of Repository
 
-- `datasets_analysis.ipynb` - contains tutorial on how to use special class created for working with datasets. It is easy modifiable and allows to use all visualization functions that were used in the study. Have code that was used to render **Fig. S2-S3-S4** and **Fig. 4** in our paper.
+- `datasets_analysis.ipynb` - contains tutorial on how to use special class created for working with datasets. It is easy modifiable and allows to use all visualization functions that were used in the study. Have code that was used to render **Fig. S2-S3-S4** and **Fig. 4** from our paper.
 
-- `gyration_plane_tutorial.ipynb` - contains ...
+- `gyration_plane_tutorial.ipynb` - contains tutorial on how to use and interpret **Gyration Number** concept. How to plot datasets in **Gyration Plan** and compare them. Also, contains bonus explanation of **Curvature** concept.
 
-- `traveling_wave_model.ipnyb` - contains tutorial on how to use synthetic data model we proposed. It is a Gaussian kernel, ...
+- `traveling_wave_model.ipnyb` - Have code that was used to render **Fig. 3, 5** and **Fig. S5-S6-S7** from our paper.
 
-**TODO** Notebooks description
 
-#### Gyration Plane
+### Gyration Plane
 
-**TODO**: ...
+In short - **Gyration Plane** is an allocation of neural population dynamics datasets in the space spanned by real and imaginary parts of their first pair of complex-conjugated eigenvalues normalized by the spectrum power.
+
+The normalized *imaginary part* measures the *structural rotation* component in the data and the normalized *real part* measures the *inflation/deflation* component of the data. 
+
+This visualization approach provides a holistic view of the rotational dynamic problem allowing a comparison of different datasets with each other in the model-agnostic (no fitting as in jPCA) manner not requiring a dimensionality reduction procedure. 
+
+**TOOD**: add gif
 
 #### Shuffling Procedures
 In `utils/shuffling.py` you can find implementation of *Shuffling Procedures* that are widely used for validation of "importance" of rotational dynamics in data.
