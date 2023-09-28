@@ -1,6 +1,7 @@
 ![Python](https://img.shields.io/badge/python-v3.9+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-
+![made with love](https://img.shields.io/badge/made%20with%20%E2%9D%A4%EF%B8%8F-8A2BE2)
+# TODO: doi zinoda
 
 # Unveiling Rotational Structure in Neural Data
 
@@ -11,8 +12,6 @@ Published in ..., **TODO doi, etc** | [bioRxiv](https://www.biorxiv.org/content/
 ## Description
 
 This repository contains code from a research paper focused on the analysis of neural activity data. Our work delves into the exploration and characterization of *rotational dynamic* prevalent in various neural datasets. We introduce a mathematical framework, informed by our research, designed to assess and quantify the "rotationess" of datasets. This framework leverages **Gyration Numbers**, a complex-valued metric derived from the eigenvalue decomposition of the differential covariance matrix of the data. The resulting **Gyration Plane** facilitates the comparison and simultaneous analysis of multiple datasets.
-
-## Badges ??
 
 ## Installation
 
