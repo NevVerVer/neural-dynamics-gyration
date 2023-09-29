@@ -60,7 +60,8 @@ The normalized *imaginary part* measures the *structural rotation* component in 
 
 This visualization approach provides a holistic view of the rotational dynamic problem allowing a comparison of different datasets with each other in the model-agnostic (no fitting as in jPCA) manner not requiring a dimensionality reduction procedure. 
 
-**TOOD**: add gif
+![Gyration Plane Example](image/gif_for_README_80dpi.gif)
+
 
 #### Shuffling Procedures
 In `utils/shuffling.py` you can find implementation of *Shuffling Procedures* that are widely used for validation of "importance" of rotational dynamics in data.
