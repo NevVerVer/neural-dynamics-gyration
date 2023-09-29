@@ -643,7 +643,7 @@ class BehaviouralMante(NeuralDataset):
 
 class SyntheticTravelingWave(NeuralDataset):
     def load_data(self, dataset_name):
-        self.data_dict = []
+        self.data_dict = {}
 
     def load_additional_info(self):
         self.sigma = self.info_d['sigma']
