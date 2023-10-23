@@ -6,11 +6,18 @@
 # On the Rotational Structure in Neural Data
 
 A repository containing the code accompanying the research paper "On the Rotational Structure in Neural Data" by Kuzmina E., Kriukov D., Lebedev M.
-
-[//]: <> (Published in ..., **TODO doi, etc** | )
 [bioRxiv](https://www.biorxiv.org/content/10.1101/2023.09.11.557230v2)
 
 ## Description
+
+<p align="center">
+<img src="image/intro.pdf" alt>
+
+</p>
+<p align="center">
+<em>The brain areas that were explicitly studied with rotational dynamics approach in rhesus monkeys, humans and rodents. </em>
+</p>
+
 
 This repository contains code from a research paper focused on the analysis of neural activity data. Our work delves into the exploration and characterization of *rotational dynamic* prevalent in various neural datasets. We introduce a mathematical framework, informed by our research, designed to assess and quantify the "rotationess" of datasets. This framework leverages **Gyration Numbers**, a complex-valued metric derived from the eigenvalue decomposition of the differential covariance matrix of the data. The resulting **Gyration Plane** facilitates the comparison and simultaneous analysis of multiple datasets.
 
@@ -84,11 +91,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 If you use the code or the findings from our paper, **please cite**:
 
 *Kuzmina, E., Kriukov, D., & Lebedev, M.* (2023). Unveiling Rotational Structure in Neural Data. bioRxiv, 2023-09.
-
 **doi**: https://doi.org/10.1101/2023.09.11.557230
-
 [bioRxiv](https://www.biorxiv.org/content/10.1101/2023.09.11.557230v2)
 
+```bash
 @article{kuzmina2023unveiling,
   title={Unveiling Rotational Structure in Neural Data},
   author={Kuzmina, Ekaterina and Kriukov, Dmitrii and Lebedev, Mikhail},
@@ -97,11 +103,7 @@ If you use the code or the findings from our paper, **please cite**:
   year={2023},
   publisher={Cold Spring Harbor Laboratory}
 }
-
-[//]: <> (
-Author A., Author B., Author C., (Year). UOn the Rotational Structure in Neural Data. JournalName, volume(issue), pages.
-**TODO add citation**
-**TODO add bibtex**)
+```
 
 ## Acknowledgments
 
