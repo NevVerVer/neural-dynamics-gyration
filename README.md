@@ -10,6 +10,8 @@ A repository containing the code accompanying the research paper "On the Rotatio
 
 ## Description
 
+This repository contains code from a research paper focused on the analysis of neural activity data. Our work delves into the exploration and characterization of *rotational dynamic* prevalent in various neural datasets. We introduce a mathematical framework, informed by our research, designed to assess and quantify the "rotationess" of datasets. This framework leverages **Gyration Numbers**, a complex-valued metric derived from the eigenvalue decomposition of the differential covariance matrix of the data. The resulting **Gyration Plane** facilitates the comparison and simultaneous analysis of multiple datasets.
+
 <p align="center">
 <img src="image/intro.png" alt>
 
@@ -18,8 +20,6 @@ A repository containing the code accompanying the research paper "On the Rotatio
 <em>The brain areas that were explicitly studied with rotational dynamics approach in rhesus monkeys, humans and rodents. </em>
 </p>
 
-
-This repository contains code from a research paper focused on the analysis of neural activity data. Our work delves into the exploration and characterization of *rotational dynamic* prevalent in various neural datasets. We introduce a mathematical framework, informed by our research, designed to assess and quantify the "rotationess" of datasets. This framework leverages **Gyration Numbers**, a complex-valued metric derived from the eigenvalue decomposition of the differential covariance matrix of the data. The resulting **Gyration Plane** facilitates the comparison and simultaneous analysis of multiple datasets.
 
 ## Installation
 
