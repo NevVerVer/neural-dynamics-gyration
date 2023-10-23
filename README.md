@@ -11,7 +11,7 @@ A repository containing the code accompanying the research paper "On the Rotatio
 ## Description
 
 <p align="center">
-<img src="image/intro.pdf" alt>
+<img src="image/intro.png" alt>
 
 </p>
 <p align="center">
@@ -81,18 +81,10 @@ In `utils/shuffling.py` you can find implementation of *Shuffling Procedures* th
 We implemented three types of shufflings from original [Churchland et al.](https://doi.org/10.1038/nature11129), and CMPT shuffling from [Micaels et al.](https://doi.org/10.1371/journal.pcbi.1005175) Feel free to use them!
 
 
-## Contributing
-We welcome contributions to this repository. If you're found errors in code or experiments, please open an issue to discuss your ideas.
-
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Citation
 If you use the code or the findings from our paper, **please cite**:
 
-*Kuzmina, E., Kriukov, D., & Lebedev, M.* (2023). Unveiling Rotational Structure in Neural Data. bioRxiv, 2023-09.
-**doi**: https://doi.org/10.1101/2023.09.11.557230
-[bioRxiv](https://www.biorxiv.org/content/10.1101/2023.09.11.557230v2)
+*Kuzmina, E., Kriukov, D., & Lebedev, M.* (2023). Unveiling Rotational Structure in Neural Data. bioRxiv, 2023-09. (**doi**: https://doi.org/10.1101/2023.09.11.557230)
 
 ```bash
 @article{kuzmina2023unveiling,
@@ -105,12 +97,6 @@ If you use the code or the findings from our paper, **please cite**:
 }
 ```
 
-## Acknowledgments
-
-Special thanks to @nosmokingsurfer for their valuable feedback and suggestions.
-
-Thanks to @bantin for the [jPCA implementation](https://github.com/bantin/jPCA).
-
 ## Contact
 For any questions or clarifications, please reach out to: *ekaterina.kuzmina@skoltech.ru*
 
@@ -122,3 +108,18 @@ For any questions or clarifications, please reach out to: *ekaterina.kuzmina@sko
 | "Neural Population Dynamics in Motor Cortex are Different for Reach and Grasp", Suresh et al.                                     | 2020 | primary motor cortex (M1), somatosensory cortex (SCx)                                          | isolated grasping task, center-out reaching task                                                      | [dryad](https://doi.org/10.5061/dryad.xsj3tx9cm)                                                                                                                                           | [link](https://doi.org/10.7554/eLife.58848) |
 | "Rotational dynamics in motor cortex are consistent with a feedback controller", Kalidindi et al.                                 | 2021 | premotor and primary motor cortex (MC), primary somatosensory cortex (areas 1, 2, 3a, 5)       | delayed center-out reaching task, posture perturbation task                                           | [dryad](https://doi.org/10.5061/dryad.nk98sf7q7) [github](https://archive.softwareheritage.org/browse/revision/d61decd3cd750147ef098de1041326fd2be07ab2/?path=monkey_analysis/data_neural) | [link](https://doi.org/10.7554/eLife.67256) |
 | "Context-dependent Computation by Recurrent Dynamics in Prefrontal Cortex", Mante et al.                                          | 2013 | prefrontal cortex (PFC): arcuate sulcus in and around the frontal eye field (FEF)              | context-dependent 2-alternative forced-choice visual discrimination task (perceptual decision-making) | [iniuzhch](https://www.ini.uzh.ch/en/research/groups/mante/data.html)                                                                                                                      | [link](https://doi.org/10.1038/nature12742) |
+
+
+## Acknowledgments
+
+Special thanks to @nosmokingsurfer for their valuable feedback and suggestions.
+
+Thanks to @bantin for the [jPCA implementation](https://github.com/bantin/jPCA).
+
+
+## Contributing
+We welcome contributions to this repository. If you're found errors in code or experiments, please open an issue to discuss your ideas.
+
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
