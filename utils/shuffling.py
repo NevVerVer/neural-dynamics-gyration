@@ -1,8 +1,8 @@
 """
 Created on Sat September 16 21:15:06 2023
 
-Description: Implementation of different shuffling approaches for neural datasets.
-Paper url: https://www.biorxiv.org/content/10.1101/2023.09.11.557230v1
+Description: Implementation of different shuffling methods of neural datasets for
+Paper url: https://www.biorxiv.org/content/10.1101/2023.09.11.557230v2
 
 @author: Ekaterina Kuzmina, ekaterina.kuzmina@skoltech.ru
 @author: Dmitrii Kriukov, dmitrii.kriukov@skoltech.ru

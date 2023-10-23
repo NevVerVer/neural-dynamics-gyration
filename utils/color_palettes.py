@@ -1,7 +1,7 @@
 """
 Created on Sat September 16 21:15:06 2023
 
-Description: Controller class implementations for:
+Description: Color palettes for:
 Paper url: https://www.biorxiv.org/content/10.1101/2023.09.11.557230v1
 
 @author: Ekaterina Kuzmina, ekaterina.kuzmina@skoltech.ru

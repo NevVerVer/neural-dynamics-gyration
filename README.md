@@ -1,13 +1,14 @@
 ![Python](https://img.shields.io/badge/python-v3.9+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![made with love](https://img.shields.io/badge/made%20with%20%E2%9D%A4%EF%B8%8F-8A2BE2)
-# TODO: doi zinoda
 
-# Unveiling Rotational Structure in Neural Data
 
-A repository containing the code accompanying the research paper "Unveiling Rotational Structure in Neural Data" by Kuzmina E., Kriukov D., Lebedev M.
+# On the Rotational Structure in Neural Data
 
-Published in ..., **TODO doi, etc** | [bioRxiv](https://www.biorxiv.org/content/10.1101/2023.09.11.557230v1)
+A repository containing the code accompanying the research paper "On the Rotational Structure in Neural Data" by Kuzmina E., Kriukov D., Lebedev M.
+
+[//]: <> (Published in ..., **TODO doi, etc** | )
+[bioRxiv](https://www.biorxiv.org/content/10.1101/2023.09.11.557230v2)
 
 ## Description
 
@@ -77,16 +78,35 @@ We implemented three types of shufflings from original [Churchland et al.](https
 We welcome contributions to this repository. If you're found errors in code or experiments, please open an issue to discuss your ideas.
 
 ## License
-This project is licensed under the XYZ License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments/Citation
-If you use the code or the findings from our paper, please cite:
+## Citation
+If you use the code or the findings from our paper, **please cite**:
 
-Author A., Author B., Author C., (Year). Unveiling rotational structure in neural data. JournalName, volume(issue), pages.
+*Kuzmina, E., Kriukov, D., & Lebedev, M.* (2023). Unveiling Rotational Structure in Neural Data. bioRxiv, 2023-09.
+
+**doi**: https://doi.org/10.1101/2023.09.11.557230
+
+[bioRxiv](https://www.biorxiv.org/content/10.1101/2023.09.11.557230v2)
+
+@article{kuzmina2023unveiling,
+  title={Unveiling Rotational Structure in Neural Data},
+  author={Kuzmina, Ekaterina and Kriukov, Dmitrii and Lebedev, Mikhail},
+  journal={bioRxiv},
+  pages={2023--09},
+  year={2023},
+  publisher={Cold Spring Harbor Laboratory}
+}
+
+[//]: <> (
+Author A., Author B., Author C., (Year). UOn the Rotational Structure in Neural Data. JournalName, volume(issue), pages.
 **TODO add citation**
-**TODO add bibtex**
+**TODO add bibtex**)
+
+## Acknowledgments
 
 Special thanks to @nosmokingsurfer for their valuable feedback and suggestions.
+
 Thanks to @bantin for the [jPCA implementation](https://github.com/bantin/jPCA).
 
 ## Contact

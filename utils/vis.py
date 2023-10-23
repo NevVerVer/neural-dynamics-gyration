@@ -1,8 +1,8 @@
 """
-Created on Sat September 16 21:15:06 2023
+Created on Mon October 23 11:05:36 2023
 
-Description: Controller class implementations for:
-Paper url: https://www.biorxiv.org/content/10.1101/2023.09.11.557230v1
+Description: Visualization functions for
+Paper url: https://www.biorxiv.org/content/10.1101/2023.09.11.557230v2
 
 @author: Ekaterina Kuzmina, ekaterina.kuzmina@skoltech.ru
 @author: Dmitrii Kriukov, dmitrii.kriukov@skoltech.ru

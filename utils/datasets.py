@@ -2,7 +2,7 @@
 Created on Sat September 17 21:15:06 2023
 
 Description: Datasets class implementation for
-Paper url: https://www.biorxiv.org/content/10.1101/2023.09.11.557230v1
+Paper url: https://www.biorxiv.org/content/10.1101/2023.09.11.557230v2
 
 @author: Ekaterina Kuzmina, ekaterina.kuzmina@skoltech.ru
 @author: Dmitrii Kriukov, dmitrii.kriukov@skoltech.ru

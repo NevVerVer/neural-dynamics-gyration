@@ -1,3 +1,13 @@
+"""
+Created on Mon October 23 11:05:36 2023
+
+Description: Visualization functions for
+Paper url: https://www.biorxiv.org/content/10.1101/2023.09.11.557230v2
+
+@author: Ekaterina Kuzmina, ekaterina.kuzmina@skoltech.ru
+@author: Dmitrii Kriukov, dmitrii.kriukov@skoltech.ru
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
