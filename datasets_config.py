@@ -11,7 +11,7 @@ from utils.datasets import (
 DATA_PATH = ''
 data_pathes = {
     'church': 'preprocessed2h5/church_dataset.h5',
-    'grasp': 'preprocessed2h5/Dataset4_Grasping_fg.h5',
+    'grasp': 'preprocessed2h5/Dataset3_Grasping_fg.h5',
     'lfp': 'preprocessed2h5/Han_CO_20171207_LeftS1Area2.h5',
     'kalid': 'preprocessed2h5/Patch_A5.h5',
     'pfc': 'preprocessed2h5/A_color_movement_context_36cond.h5',
@@ -34,7 +34,7 @@ pfc_params = {
     'hist_space': 150,
     'kalid': False,
     'pfc': True,
-    'fs': 1,
+    'fs': 1, # ms
                  }
 church_params = {
     'name': 'Churchland et at.',
@@ -91,9 +91,9 @@ lfp_params = {
     'hist_space': 50,
     'kalid': False,
     'pfc': False,
-    'fs': 30,
+    'fs': 30,  # ms
                  }
-kalid_params = {
+kalid_params = { 
     'name': 'Kalidindi et al.',
     'class': ReachingKalidindi,
     'size': '[8 x 30 x 70]',

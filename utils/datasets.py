@@ -84,6 +84,9 @@ class NeuralDataset:
     def preprocess_data(self):
         raise NotImplementedError("Subclasses must implement this method")
     
+    def load_additional_info(self):
+        raise NotImplementedError("Subclasses must implement this method")
+    
     def load_preprocessed(self, preproc_dir, pfname):
         self.info_d = load_h5_file(preproc_dir, pfname)
         self.data = self.info_d['data']
@@ -419,7 +422,8 @@ class ReachingChurchland(NeuralDataset):
     """
     def load_data(self, dataset_name):
         from jPCA.util import load_churchland_data
-        self.data_dict = load_churchland_data(self.dataset_dir + dataset_name)
+        self.d = load_churchland_data(self.dataset_dir + dataset_name)
+        self.data_dict = {'data': self.d[0], 'time': self.d[1]}
         print(f'File {dataset_name} successfully loaded!')
 
     def load_additional_info(self):
@@ -433,8 +437,8 @@ class ReachingChurchland(NeuralDataset):
         self.cmap = cmaps[self.cmap_name]
 
     def preprocess_data(self):
-        self.data = np.asarray(self.data_dict[0])
-        self.time = np.asarray(self.data_dict[1])
+        self.data = np.asarray(self.data_dict['data'])
+        self.time = np.asarray(self.data_dict['time'])
         go_cue_time = 50 
         self.go_cue = list(self.time).index(go_cue_time)
 

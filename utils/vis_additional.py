@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib import ticker
 
-from tqdm import tqdm
+from tqdm import tqdm 
 import jPCA
 from jPCA.util import plot_projections
 from scipy.optimize import curve_fit
@@ -91,6 +91,10 @@ def plot_peth(datas_list, go_cue, ax, fs, sub_mean=False):
     cbar.update_ticks()
     ax.yaxis.set_major_locator(ticker.MultipleLocator(20))
 
+    pos = np.arange(0., datas.shape[1]+1, datas.shape[1]//4)
+    times = pos * fs
+    times = [int(t) for t in times]
+    ax.set_xticks(pos, labels=times)
 
 def build_jPCA(data, ax, ts, te, sub_mean=True,
                c_siz=0.001, arr_siz=0.001, cmap=jpca_palette_journ1(),
