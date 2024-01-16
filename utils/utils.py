@@ -139,12 +139,14 @@ def generate_response(t_max=600, N=100, a=0., b=1., steps=61,
     return x, t, t_i
 
 
-def compute_curvature(X):
+def compute_curvature(X, clip=False):
     vel = np.array([np.gradient(X[:, i]) for i in range(X.shape[1])]).T
     acc = np.array([np.gradient(vel[:, i]) for i in range(vel.shape[1])]).T
     speed = norm(vel, axis=1)
     cross = np.sqrt((norm(vel, axis=1) * norm(acc, axis=1))**2 - (np.sum(acc * vel, axis=1))**2)
     curvature_val = cross / (speed**(3))
+    if clip:
+        curvature_val = np.clip(curvature_val, -1000., 1000.)
     return curvature_val
 
 
@@ -207,5 +209,17 @@ def eigenPCA(datas_list, npca=4, plot=True):
         variances.append(pca.explained_variance_ratio_.sum())
         if plot:
             plt.plot(Xp[:, 0], Xp[:, 1])
-    print("Min-Max variance explained:", min(variances), max(variances))
     return Xp
+
+def compress_datas(datas_list, npca=4, plot=True):
+    if type(datas_list) == list:
+        datas = np.stack(datas_list, axis=0)
+    else:
+        datas = datas_list.copy()
+    # datas = np.stack(datas, axis=0)
+    num_conditions, num_time_bins, num_units = datas.shape
+    pca = PCA(npca)
+    datas = pca.fit_transform(datas)
+    datas = datas.reshape(num_conditions, num_time_bins, npca)
+    data_list = [x for x in datas]
+    return data_list

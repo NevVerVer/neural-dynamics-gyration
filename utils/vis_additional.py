@@ -18,6 +18,7 @@ import jPCA
 from jPCA.util import plot_projections
 from scipy.optimize import curve_fit
 from scipy.stats import pearsonr
+from sklearn.decomposition import PCA
 
 from utils.color_palettes import (
     bg_gray_color,
@@ -31,14 +32,14 @@ from utils.utils import (
     pca_rotation)
 
 
-def plot_curvature(datas, go_cue, ax, fs, sub_mean=False):
+def plot_curvature(datas, go_cue, ax, fs, sub_mean=False, clip=False):
     datas = soft_normalize(datas)
     if sub_mean:
         datas = subtract_cc_mean(datas)
     times = np.arange(datas.shape[1]) * fs
     cc_curv = []
     for X in datas:
-        curv = compute_curvature(X)
+        curv = compute_curvature(X, clip=clip)
         cc_curv.append(curv)
         ax.plot(times, curv, color='grey', lw=1 )
     ax.axhline(0, color='black', alpha=0.4, ls='--')
@@ -165,3 +166,51 @@ def plot_R2_fitting(datas, times, ax, ts, te,
         build_jPCA(datas_cap, ax, ts, te, sub_mean=True,
                    c_siz=c_siz, arr_siz=arr_siz, cmap=cmap, fitting=True)
     return R2
+
+
+# functions below for building panel "Curvature population analysis"
+def plot_curvature_(datas, go_cue, ax, fs, blue=False):
+    from utils.color_palettes import bg_gray_color
+    
+    times = np.arange(datas.shape[1]) * fs
+    for X in datas:
+        ax.plot(times, X, color='grey', lw=1 )
+
+    ax.axhline(0, color='black', alpha=0.4, ls='--')
+    ax.axvline(go_cue, color='black', alpha=0.4, ls='--', 
+                label=f'go cue={go_cue}')
+    cc_mean = np.mean(datas, axis=0)
+    if blue:
+        ax.plot(times, cc_mean, c=journ_color_dict['blue'], lw=1.4, label='mean')
+    else: 
+        ax.plot(times, cc_mean, c=journ_color_dict['red'], lw=1.4, label='mean')
+    ax.legend(prop={'size': 9})
+    ax.grid(alpha=0.3)
+    for axis in ['top', 'bottom', 'left', 'right']:
+        ax.spines[axis].set_linewidth(0.5)
+    ax.set_facecolor(bg_gray_color)
+
+
+def compress_datas(datas_list, npca=4, plot=True):
+    if type(datas_list) == list:
+        datas = np.stack(datas_list, axis=0)
+    else:
+        datas = datas_list.copy()
+    num_conditions, num_time_bins, num_units = datas.shape
+    datas = np.concatenate(datas, axis=0)
+    pca = PCA(npca)
+    datas = pca.fit_transform(datas)
+    datas = datas.reshape(num_conditions, num_time_bins, npca)
+    data_list = [x for x in datas]
+    return data_list
+
+
+def plot_curv_dist_hist(dist, ax, church=False):
+    ax.bar(np.arange(1, len(dist)+1), dist)
+    ax.set_xlabel('Index of condition')
+    ax.set_ylabel('Mean absolute difference')
+    if church:
+        ax.set_xticks(np.arange(1, len(dist)+1, 15))
+    else:
+        ax.set_xticks(np.arange(1, len(dist)+1, 3))
+    return ax
