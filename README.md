@@ -3,10 +3,9 @@
 ![made with love](https://img.shields.io/badge/made%20with%20%E2%9D%A4%EF%B8%8F-8A2BE2)
 
 
-# On the Rotational Structure in Neural Data
+# Neuronal travelling waves explain rotational dynamics in experimental datasets and modelling
 
-A repository containing the code accompanying the research paper "On the Rotational Structure in Neural Data" by Kuzmina E., Kriukov D., Lebedev M.
-[bioRxiv](https://www.biorxiv.org/content/10.1101/2023.09.11.557230v2)
+A repository containing the code accompanying the research paper "Neuronal travelling waves explain rotational dynamics in experimental datasets and modelling" by Kuzmina E., Kriukov D., Lebedev M., 2024, published in [scientific reports](https://www.nature.com/articles/s41598-024-53907-2). Preprint: [bioRxiv](https://www.biorxiv.org/content/10.1101/2023.09.11.557230v2)
 
 ## Description
 
@@ -84,11 +83,28 @@ We implemented three types of shufflings from original [Churchland et al.](https
 ## Citation
 If you use the code or the findings from our paper, **please cite**:
 
-*Kuzmina, E., Kriukov, D., & Lebedev, M.* (2023). Unveiling Rotational Structure in Neural Data. bioRxiv, 2023-09. (**doi**: https://doi.org/10.1101/2023.09.11.557230)
+*Kuzmina, E., Kriukov, D., & Lebedev, M.* (2024). Neuronal travelling waves explain rotational dynamics in experimental datasets and modelling. Scientific Reports, 14(1), 3566.(**doi**: https://doi.org/10.1038/s41598-024-53907-2)
 
 ```bash
-@article{kuzmina2023unveiling,
-  title={Unveiling Rotational Structure in Neural Data},
+@article{kuzmina2024neuronal,
+  title={Neuronal travelling waves explain rotational dynamics in experimental datasets and modelling},
+  author={Kuzmina, Ekaterina and Kriukov, Dmitrii and Lebedev, Mikhail},
+  journal={Scientific Reports},
+  volume={14},
+  number={1},
+  pages={3566},
+  year={2024},
+  publisher={Nature Publishing Group UK London}
+}
+```
+
+If you use the code or the findings from our preprint, **please cite**:
+
+*Kuzmina, E., Kriukov, D., & Lebedev, M.* (2023). On the Rotational Structure in Neural Data. bioRxiv, 2023-09. (**doi**: https://doi.org/10.1101/2023.09.11.557230)
+
+```bash
+@article{kuzmina2023rotational,
+  title={On the Rotational Structure in Neural Data},
   author={Kuzmina, Ekaterina and Kriukov, Dmitrii and Lebedev, Mikhail},
   journal={bioRxiv},
   pages={2023--09},
